@@ -11,7 +11,7 @@
                 <?php echo $this->session->flashdata('errors'); ?>
             </div>
         <?php } ?>
-        <form action="<?php echo base_url('employee_crud/store');?>" method="POST">
+        <form action="<?php echo base_url('employee_crud/store');?>" method="POST" enctype="multipart/form-data">
 
         <div class="row pb-3">
             <div class="col">
@@ -54,6 +54,16 @@
             <textarea class="form-control" id="description" rows="3" name="description"><?php echo set_value('description'); ?></textarea>
             </div>
         </div>
+
+        <div class="row pb-3">
+            <div class="col">
+            <label for="name">Upload Profile Pic</label>
+            <input type="file" class="form-control" id="profile_pic" name="profile_pic">
+            </div>
+            <div class="col">          
+            </div>           
+        </div> 
+
            
           
             <button type="submit" class="btn btn-outline-primary">Save</button>

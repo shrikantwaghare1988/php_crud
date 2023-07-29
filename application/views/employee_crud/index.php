@@ -19,8 +19,7 @@
                 <th>Email</th>
                 <th>City</th>
                 <th>Department</th>
-                <th>Pic</th>
-                <th>Description</th>
+                <th>Pic</th>                
                 <th width="240px">Action</th>
             </tr>
  
@@ -31,8 +30,7 @@
                 <td><?php echo $e['email']; ?></td>
                 <td><?php echo $e['city']; ?></td>
                 <td><?php echo $e['department']; ?></td>
-                <td><?php echo $e['profile_pic']; ?></td>
-                <td><?php echo $e['description']; ?></td>
+                <td><?php echo $e['profile_pic']; ?></td>                
 
                 <td>
                     <a

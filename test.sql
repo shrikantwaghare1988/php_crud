@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2023 at 05:39 PM
+-- Generation Time: Jul 27, 2023 at 06:00 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -146,33 +146,6 @@ INSERT INTO `emp` (`id`, `first_name`, `last_name`, `gender`, `country`, `age`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `emp_crud`
---
-
-CREATE TABLE `emp_crud` (
-  `id` int(11) NOT NULL,
-  `full_name` varchar(100) NOT NULL,
-  `mobile_no` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `city` varchar(100) NOT NULL,
-  `profile_pic` varchar(100) NOT NULL,
-  `department` varchar(100) NOT NULL,
-  `description` varchar(200) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `emp_crud`
---
-
-INSERT INTO `emp_crud` (`id`, `full_name`, `mobile_no`, `email`, `city`, `profile_pic`, `department`, `description`, `created_date`) VALUES
-(2, 'Shrikant Waghare2', '9898989898', 'shrikantbro322886@gmail.com', 'Ambarnath', '', '', 'uyyuvuyvu', '2023-07-29 06:53:32'),
-(3, 'Shrikant Waghare', '9898989898', 'prashant24waghare@gmail.com', 'Ambarnath', '', 'HR', '', '2023-07-29 07:10:04'),
-(4, 'Shrikant Waghare', '7676767898', 'prashant24wttaghare@gmail.com', 'Ambarnath', '', 'Account', 'ytffyf', '2023-07-29 11:50:42');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `location`
 --
 
@@ -291,12 +264,6 @@ ALTER TABLE `emp`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `emp_crud`
---
-ALTER TABLE `emp_crud`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `location`
 --
 ALTER TABLE `location`
@@ -318,12 +285,6 @@ ALTER TABLE `user`
 --
 ALTER TABLE `emp`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
-
---
--- AUTO_INCREMENT for table `emp_crud`
---
-ALTER TABLE `emp_crud`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `location`
