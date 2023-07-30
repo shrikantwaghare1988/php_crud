@@ -124,7 +124,7 @@ class Employee_crud extends CI_Controller {
 		$profile_pic = $emp_data['profile_pic'];
 		if($profile_pic!="")
 		{
-			unlink("upload/profile_pic/".$emp_data);
+			unlink("upload/emp_crud/".$profile_pic);
 		}
 		
 		//----delete record from table---
