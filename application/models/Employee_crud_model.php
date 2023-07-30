@@ -16,7 +16,8 @@ class Employee_crud_model extends CI_Model
     public function store($data)
     { 
         $result = $this->db->insert('emp_crud', $data);
-        return $result;
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
     }
 
     public function get($id)

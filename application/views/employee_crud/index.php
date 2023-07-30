@@ -30,7 +30,7 @@
                 <td><?php echo $e['email']; ?></td>
                 <td><?php echo $e['city']; ?></td>
                 <td><?php echo $e['department']; ?></td>
-                <td><?php echo $e['profile_pic']; ?></td>                
+                <td><img src="<?php echo base_url().'upload/emp_crud/'.$e['profile_pic']; ?>" alt="" border=3 height=70 width=70></img></td>                
 
                 <td>
                     <a

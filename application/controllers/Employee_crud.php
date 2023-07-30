@@ -3,15 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Employee_crud extends CI_Controller {
 
-	function __construct() {
+	function __construct() 
+	{
         parent::__construct();
-
         $this->load->database();
 		$this->load->model('Employee_crud_model', 'em');
 		$this->load->library('session');
 		$this->load->library('form_validation');
-		$this->load->helper(array('form', 'url'));
-      
+		$this->load->helper(array('form', 'url'));      
         header('Access-Control-Allow-Origin: *'); //--for cors error-----
     }
 	public function index()
@@ -50,7 +49,27 @@ class Employee_crud extends CI_Controller {
 		}
 		else
 		{
-			$this->em->store($data);
+			$insert_id = $this->em->store($data);
+
+			//----upload profilr pic file----
+
+			$file_name = $_FILES['profile_pic']['name'];			
+			$file_tmp =$_FILES['profile_pic']['tmp_name'];
+			$ext_array = explode('.',$_FILES['profile_pic']['name']);		
+			$file_ext=strtolower($ext_array[1]);
+			
+			$file_name_new = "pic_".rand(11111,99999).".".$file_ext;
+			$upload_path = "upload/emp_crud/".$file_name_new;
+
+			if(move_uploaded_file($file_tmp,$upload_path))
+			{				
+				//die("file uploaded");
+				$this->db->where('id', $insert_id);
+    			$this->db->update('emp_crud', array('profile_pic' => $file_name_new));
+			}
+
+			//----end of file upload code----
+
 			$this->session->set_flashdata('success', "Saved Successfully!");
 			redirect(base_url('employee_crud'));
 		}   
@@ -86,8 +105,7 @@ class Employee_crud extends CI_Controller {
 			$this->em->update($id,$data);
 			$this->session->set_flashdata('success', "Updated Successfully!");
 			redirect(base_url('employee_crud'));
-		}
-	
+		}	
 	}
 	public function show($id)
 	{
@@ -100,6 +118,17 @@ class Employee_crud extends CI_Controller {
 	}
 	public function delete($id)
 	{
+		//---delete profile pic----
+
+		$emp_data = $this->em->get($id);
+		$profile_pic = $emp_data['profile_pic'];
+		if($profile_pic!="")
+		{
+			unlink("upload/profile_pic/".$emp_data);
+		}
+		
+		//----delete record from table---
+
 		$item = $this->em->delete($id);
 		$this->session->set_flashdata('success', "Deleted Successfully!");
 		redirect(base_url('employee_crud'));
@@ -111,23 +140,30 @@ class Employee_crud extends CI_Controller {
 		{
 			$this->form_validation->set_message('file_check', 'Plz upload profile pic.');
 			return false;
-		 }
-		$filepath = $_FILES['profile_pic']['tmp_name'];
-		$fileSize = filesize($filepath);
-		$fileinfo = finfo_open(FILEINFO_MIME_TYPE);
-		$filetype = finfo_file($fileinfo, $filepath);
+		}
 
-		if ($fileSize > 3145728) 
+		$file_name = $_FILES['profile_pic']['name'];
+		$file_size =$_FILES['profile_pic']['size'];
+		$file_tmp =$_FILES['profile_pic']['tmp_name'];
+		$file_type=$_FILES['profile_pic']['type'];
+		$ext_array = explode('.',$_FILES['profile_pic']['name']);		
+		$file_ext=strtolower($ext_array[1]);
+
+		//$file_ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+	
+		$extensions= array("jpeg","jpg","png");
+		
+		if(in_array($file_ext,$extensions)=== false)
+		{			
+			$this->form_validation->set_message('file_check', $file_ext.' extension not allowed, please choose a JPEG or PNG file.');
+			return false;
+		}		
+		if ($file_size > 1024 * 1024 * 3) 
 		{ // 3 MB (1 byte * 1024 * 1024 * 3 (for 3 MB))
-			$this->form_validation->set_message('file_check', 'The file size should be less than 3MB.');
+
+			$this->form_validation->set_message('file_check', 'File size must be less than 2 MB.');
 			return false;			
-		 }
-		 $allowedTypes = ['image/png' => 'png','image/jpeg' => 'jpg'];
-		 if(!in_array($filetype, array_keys($allowedTypes))) 
-		 {
-			$this->form_validation->set_message('file_check', 'Only PNG or JPG file type allowed.');
-			return false;			
-		 }
+		}		
 	}
 	public function check_duplicate_email($email, $id)
 	{
@@ -143,6 +179,5 @@ class Employee_crud extends CI_Controller {
 		{
 			return false;
 		}		
-	}
-	
+	}	
 }
