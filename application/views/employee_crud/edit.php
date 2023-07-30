@@ -12,7 +12,7 @@
             </div>
         <?php } ?>
  
-        <form action="<?php echo base_url('employee_crud/update');?>" method="POST">
+        <form action="<?php echo base_url('employee_crud/update');?>" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?php echo $emp['id']?>">
 
             <div class="row pb-3">
@@ -56,9 +56,18 @@
             <textarea class="form-control" id="description" rows="3" name="description"><?php echo $emp['description']?></textarea>
             </div>
         </div>
+
+        <div class="row pb-3">
+            <div class="col">
+            <label for="name">Upload Profile Pic</label>
+            <input type="file" class="form-control" id="profile_pic" name="profile_pic">
+            </div>
+            <div class="col">          
+            </div>           
+        </div>
             
           
-            <button type="submit" class="btn btn-outline-primary">Save Project</button>
+            <button type="submit" class="btn btn-outline-primary">Save</button>
         </form>
        
     </div>

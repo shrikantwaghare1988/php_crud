@@ -35,4 +35,13 @@ class Employee_crud_model extends CI_Model
         $result = $this->db->delete('emp_crud',['id' => $id]);
         return $result;
     }
+    public function delete_profile_pic($id)
+    {
+        $emp_data = $this->em->get($id);
+		$profile_pic = $emp_data['profile_pic'];
+		if($profile_pic!="")
+		{
+			unlink("upload/emp_crud/".$profile_pic);
+		}
+    }
 }

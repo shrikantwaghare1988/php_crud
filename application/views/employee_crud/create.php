@@ -62,12 +62,13 @@
             </div>
             <div class="col">          
             </div>           
-        </div> 
-
-           
+        </div>           
           
-            <button type="submit" class="btn btn-outline-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+
         </form>
        
     </div>
+   
+    
 </div>
