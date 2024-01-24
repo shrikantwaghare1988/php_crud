@@ -29,7 +29,7 @@ class Php_excel extends CI_Controller {
 
 		$sheet = $excel->getActiveSheet()->toArray(null,true,true,true);
 		//pre($excel->getActiveSheet());die;
-		//pre($sheet);die;
+		pre($sheet);die;
         $arrayCount = count($sheet); 
         for($i=2;$i<=$arrayCount;$i++)
         {                   
